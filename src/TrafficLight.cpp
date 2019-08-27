@@ -71,12 +71,12 @@ void TrafficLight::cycleThroughPhases()
     // Also, the while-loop should use std::this_thread::sleep_for to wait 1ms between two cycles.
     std::random_device rd;
     std::default_random_engine gen(rd());
-    std::uniform_int_distribution<int> dis(4, 6);
+    std::uniform_int_distribution<int> dis(4000, 6000);
 
     while (true)
     {
-        int sleepForSeconds = dis(gen);
-        std::this_thread::sleep_for(std::chrono::seconds(sleepForSeconds));
+        int sleepForMs = dis(gen);
+        std::this_thread::sleep_for(std::chrono::milliseconds(sleepForMs));
 
         _currentPhase = static_cast<TrafficLightPhase>((_currentPhase + 1) % 2);
         TrafficLightPhase phase = _currentPhase;
